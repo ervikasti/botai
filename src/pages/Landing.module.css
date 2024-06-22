@@ -1,0 +1,32 @@
+.landing_container {
+    display: flex;
+}
+
+.left_section {
+    min-width: 20vw;
+    position: relative;
+}
+
+.main_section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100vw;
+    position: relative;
+    background: var(--bg-primary);
+}
+
+.main_section_app_name {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 32.17px;
+    text-align: left;
+    margin-left: 1rem;
+    color: var(--app-name);
+}
+
+.main_section_input_field {
+    position: static;
+    bottom: 10;
+}

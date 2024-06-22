@@ -1,0 +1,18 @@
+.input{
+   margin: 2px;
+   min-width: 80%;
+   height: 1.7rem; 
+   padding: 1px;
+}
+
+form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+}
+
+Button{
+    background: var(--btn-bg-primary-color) !important;
+    color: black !important;
+}
