@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 
 import styles from './Form.module.css';
-const Form = ({inputText,click,handleSubmit}) => {
+const Form = ({inputText,click,handleSubmit,save}) => {
     
     return (
         <form onSubmit={handleSubmit}>
@@ -9,7 +9,7 @@ const Form = ({inputText,click,handleSubmit}) => {
             <Button type='submit' variant="contained">
                 Ask
             </Button>
-            <Button variant="contained">
+            <Button variant="contained" onClick={save}>
                 Save
             </Button>
         </form>
