@@ -3,8 +3,29 @@
 }
 
 .left_section {
+    display: flex;
+    flex-direction: column;
     min-width: 20vw;
     position: relative;
+}
+
+.left_section_detail{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.left_section_detail img{
+    border-radius: 50%;
+}
+
+.left_section_detail p{
+    cursor: pointer;
+}
+
+.left_section_detail p:hover{
+    background-color:aqua;
 }
 
 .main_section {

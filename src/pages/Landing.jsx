@@ -25,28 +25,34 @@ const Landing = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(sampleData);
+    // console.log(sampleData);
     const ans = sampleData.find((q) => { return q['question']?.toLocaleUpperCase() === inputText.toLocaleUpperCase() });
     // console.log(ans['response']);
     setDisp(true);
-    setChatList([...chatList, { id: nextId++, name: inputText, ans: ans?.response }])
+    setChatList([...chatList, { id: ++nextId, name: inputText, ans: ans?.response }])
     setInputText('');
     setIsHistoryActive(false);
   }
 
   const handleSave = (e) => {
     let copyChatHistory = JSON.parse(JSON.stringify(chatList));
-    console.log(copyChatHistory.length);
-    if(copyChatHistory.length!==0)
+
+    if (chatHistory.length == 0){
       setChatHistory(copyChatHistory);
-    // else{
-    //   console.log('in else')
-    //   setChatHistory([...chatHistory],...copyChatHistory)
-    // }
-    console.log("Chat History", chatHistory);
+    }
+    else {
+      const arr = [...copyChatHistory];
+      console.log("New Chat : ",arr);
+      let historyArr=[...chatHistory];
+      console.log("OLD History : ",historyArr);
+      arr?.flatMap(v=>historyArr.push(v));
+      console.log("New history : ",historyArr);
+      setChatHistory(historyArr);
+    }
+    
   }
 
-  
+
 
   const handlePast = () => {
     setIsHistoryActive(true);
@@ -54,7 +60,7 @@ const Landing = () => {
     console.log('btn clicked')
   }
 
-  const handleNewChat = () =>{
+  const handleNewChat = () => {
     setChatList([]);
     setIsHistoryActive(false);
   }
@@ -62,15 +68,13 @@ const Landing = () => {
   return (
     <div className={style.landing_container}>
       <div className={style.left_section}>
-        <div>
-          <div>
-            <img alt='logo'></img>
-            <p onClick={handleNewChat}>New Chat</p>
-          </div>
-          <Button variant="contained" onClick={handlePast}>
-            Past Conversation
-          </Button>
+        <div className={style.left_section_detail}>
+          <img src="/ai_logo.svg" alt='logo'></img>
+          <p onClick={handleNewChat}>New Chat</p>
         </div>
+        <Button variant="contained" onClick={handlePast}>
+          Past Conversation
+        </Button>
       </div>
       <div className={style.main_section}>
         <div className={style.main_section_app_name}>
@@ -80,7 +84,7 @@ const Landing = () => {
           {disp &&
             <Chat question={chatList} />}
           {isHistoryActive && (
-            <Chat question={chatHistory}  from='history'/>)}
+            <Chat question={chatHistory} from='History' />)}
         </div>
         <div className={style.main_section_input_field}>
           <Form inputText={inputText} click={handleInputText} handleSubmit={handleSubmit} save={handleSave} />
