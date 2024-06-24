@@ -4,12 +4,12 @@ import { useState } from "react";
 import styles from './Card.module.css';
 import { BasicRating } from '../rating/BasicRating';
 import FeedBackModal from '../FeedbackModal/FeedbackModal';
-const Card = ({ id, msg, from, handleChange, feed, rating, isHistoryActive }) => {
+const Card = ({ id, msg, from, handleChange, feed, rating, isHistoryActive,pageFrom }) => {
     const [hidden, setHidden] = useState(true);
     const [ratingIsActive, setRatingIsActive] = useState(false);
     const [feedbackIsActive, setfeedBackIsActive] = useState(false);
     const [feedback, setFeedback] = useState('');
-    const [rate, setRate] = useState(2);
+    const [rate, setRate] = useState(0);
     // const [value, setValue] = React.useState(2);
 
     const handleThumbsUP = () => {
@@ -28,10 +28,10 @@ const Card = ({ id, msg, from, handleChange, feed, rating, isHistoryActive }) =>
 
     const handleRating = (val) => {
         setRate(val);
-        handleChange({ id: id, feedback: feedback, rate: rate });
+        handleChange({ id: id, feedback: feedback, rate: val });
     }
 
-
+    console.log(pageFrom==='History');
 
     return (
 
@@ -46,7 +46,7 @@ const Card = ({ id, msg, from, handleChange, feed, rating, isHistoryActive }) =>
                 <div className={styles.card_container_details_sub}>
                     <h6>time stamp</h6>
 
-                    {from === 'Ai' &&
+                    {/* {from === 'Ai' &&
                         <div className={styles.response}
                             onMouseEnter={() => setHidden(false)}
                             onMouseLeave={() => setHidden(true)}>
@@ -54,11 +54,11 @@ const Card = ({ id, msg, from, handleChange, feed, rating, isHistoryActive }) =>
                                 <div className={styles.thumbUp} onClick={handleThumbsUP}><ThumbUpAltOutlinedIcon></ThumbUpAltOutlinedIcon></div>
                                 <div className={styles.thumbDown} onClick={handleFeedback}><ThumbDownOffAltOutlinedIcon></ThumbDownOffAltOutlinedIcon></div>
                             </>)}
-                        </div>}
+                        </div>} */}
 
 
-                    {isHistoryActive ? null :
-                        <div>
+                    {pageFrom==='History' ? null :
+                        <>
                             {from === 'Ai' &&
                                 <div className={styles.response}
                                     onMouseEnter={() => setHidden(false)}
@@ -68,15 +68,19 @@ const Card = ({ id, msg, from, handleChange, feed, rating, isHistoryActive }) =>
                                         <div className={styles.thumbDown} onClick={handleFeedback}><ThumbDownOffAltOutlinedIcon></ThumbDownOffAltOutlinedIcon></div>
                                     </>)}
                                 </div>}
-                        </div>
+                        </>
                     }
 
                 </div>
 
-                {ratingIsActive && <BasicRating handleRating={handleRating} value={rate} isHistoryActive />}
+                {ratingIsActive && <BasicRating handleRating={handleRating} value={rate} />}
                 {feedbackIsActive && <FeedBackModal handleFeedBack={handleResponse} />}
-                {/* {feedback && <div>Feedback: {feedback}</div>} */}
-                {rating && <BasicRating value={rating} />} 
+                {feedback && <div>Feedback: {feedback}</div>}
+                {/* {rating && isHistoryActive (<BasicRating value={rating} />)}  */}
+                {pageFrom==='History' && (<>
+                    <BasicRating value={rating} pageFrom={pageFrom}/>
+                    <div>Feedback: {feed}</div>
+                </>)}
                 
             </div>
         </div>

@@ -15,4 +15,5 @@ form{
 Button{
     background: var(--btn-bg-primary-color) !important;
     color: black !important;
+    margin: 0px 0.5rem !important;
 }

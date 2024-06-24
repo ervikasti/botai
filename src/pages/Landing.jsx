@@ -4,6 +4,7 @@ import { Form } from '../components/Form/Form';
 import { Chat } from '../components/Chat/Chat';
 import sampleData from "../sampleData.json";
 import Button from '@mui/material/Button';
+import { AppBar } from '@mui/material';
 
 let nextId = 0;
 const Landing = () => {
@@ -86,13 +87,6 @@ const Landing = () => {
 
     setChatList(newIndex);
 
-    // chatList.map((val)=>{
-    //   console.log(val.id, id)
-    //   if(val.id== id){
-    //     console.log('INISDE update')
-    //     setChatList([...chatList, { id: id, name: val.name, ans:val.ans, rating:data.rate, feedback:data.feedback }])
-    //   }});
-
   }
 
   return (
@@ -106,6 +100,7 @@ const Landing = () => {
           Past Conversation
         </Button>
       </div>
+  
       <div className={style.main_section}>
         <div className={style.main_section_app_name}>
           {appName}

@@ -11,10 +11,10 @@ const Chat = ({ question, from, handleChange, isHistoryActive }) => {
                     {
                         value.ans ?
                             <Card id={value.id} msg={value.ans} from='Ai' feed={value.feedback} isHistoryActive
-                                rating={value.rating} handleChange={handleChange} ></Card>
+                                rating={value.rating} handleChange={handleChange} pageFrom={from}></Card>
                             :
                             <Card id={value.id} msg='Sorry, no response found !' from='Ai' isHistoryActive
-                            rating={value.rating} handleChange={handleChange}></Card>
+                            rating={value.rating} handleChange={handleChange} pageFrom={from}></Card>
                     }
                 </>
 

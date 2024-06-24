@@ -8,6 +8,19 @@
     min-width: 20vw;
     position: relative;
 }
+.left_section_mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 480px){
+    .left_section{
+        min-width: 10vw;
+    }
+    
+    .main_section_input_field{
+        max-width: 70%;
+    }
+}
 
 .left_section_detail{
     display: flex;
