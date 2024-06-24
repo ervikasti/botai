@@ -1,10 +1,10 @@
-import * as React from 'react';
+// import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
-function BasicRating({handleRating}) {
-  const [value, setValue] = React.useState(2);
+function BasicRating({ handleRating,value }) {
+
 
   return (
     <Box
@@ -13,17 +13,35 @@ function BasicRating({handleRating}) {
       }}
     >
       <Typography component="legend">Rating</Typography>
-      <Rating
-        name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-          handleRating(value);
-        }}
-      />
+      {/* {isHistoryActive ? (
+        <Rating
+          name="simple-controlled"
+          value={value}
+          />) :
+        (<Rating
+          name="simple-controlled"
+          value={value}
+          onChange={
+            (event, newValue) => {
+              // setValue(newValue);
+              handleRating(newValue);
+            }
+          }/>)} */}
+
+<Rating
+          name="simple-controlled"
+          value={value}
+          onChange={
+            (event, newValue) => {
+              // setValue(newValue);
+              handleRating(newValue);
+            }
+          }/>
      
+
+
     </Box>
   );
 }
 
-export {BasicRating}
+export { BasicRating }

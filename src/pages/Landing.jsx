@@ -65,7 +65,7 @@ const Landing = () => {
   const handlePast = () => {
     setIsHistoryActive(true);
     setDisp(false);
-    console.log('btn clicked')
+    // console.log('btn clicked')
   }
 
   const handleNewChat = () => {
@@ -77,12 +77,21 @@ const Landing = () => {
     let newList = [...chatList];
     console.log('INSIDE CHANGE')
     let id = data.id;
-    chatList.map((val)=>{
-      console.log(val.id, id)
-      if(val.id== id){
-        console.log('INISDE update')
-        setChatList([...chatList, { id: id, name: val.name, ans:val.ans, rating:data.rate, feedback:data.feedback }])
-      }});
+
+    const currentIndex = chatList.findIndex( (d)=> d.id=== id);
+
+    const updateIndex = {...chatList[currentIndex],rating:data.rate, feedback:data.feedback};
+
+    const newIndex = [...chatList.slice(0,currentIndex), updateIndex, ...chatList.slice(currentIndex+1)];
+
+    setChatList(newIndex);
+
+    // chatList.map((val)=>{
+    //   console.log(val.id, id)
+    //   if(val.id== id){
+    //     console.log('INISDE update')
+    //     setChatList([...chatList, { id: id, name: val.name, ans:val.ans, rating:data.rate, feedback:data.feedback }])
+    //   }});
 
   }
 
@@ -105,7 +114,7 @@ const Landing = () => {
           {disp &&
             <Chat question={chatList} handleChange={handleChange}/>}
           {isHistoryActive && (
-            <Chat question={chatHistory} from='History' />)}
+            <Chat question={chatHistory} from='History' isHistoryActive/>)}
         </div>
         <div className={style.main_section_input_field}>
           <Form inputText={inputText} click={handleInputText} handleSubmit={handleSubmit} save={handleSave} />
