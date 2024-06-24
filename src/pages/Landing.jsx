@@ -28,6 +28,12 @@ const Landing = () => {
   }
 
   const handleSubmit = (e) => {
+    const date =  new Date();
+    const formatedTime = date.toLocaleString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+  });
+    // console.log(formatedTime);
     e.preventDefault();
     // console.log(sampleData);
     let ans ='';
@@ -40,7 +46,7 @@ const Landing = () => {
     }
     // console.log(ans['response']);
     setDisp(true);
-    setChatList([...chatList, { id: ++nextId, name: inputText, ans: ans?ans:'Sorry, no response found' }])
+    setChatList([...chatList, { id: ++nextId, name: inputText, time:formatedTime, ans: ans?ans:'Sorry, no response found' }])
     setInputText('');
     setIsHistoryActive(false);
   }
@@ -53,11 +59,11 @@ const Landing = () => {
     }
     else {
       const arr = [...copyChatHistory];
-      console.log("New Chat : ",arr);
+      // console.log("New Chat : ",arr);
       let historyArr=[...chatHistory];
-      console.log("OLD History : ",historyArr);
+      // console.log("OLD History : ",historyArr);
       arr?.flatMap(v=>historyArr.push(v));
-      console.log("New history : ",historyArr);
+      // console.log("New history : ",historyArr);
       setChatHistory(historyArr);
     }
     
@@ -75,13 +81,19 @@ const Landing = () => {
   }
 
   const handleChange = (data) => {
+    const date =  new Date();
+    const formatedTime = date.toLocaleString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+  });
+
     let newList = [...chatList];
     console.log('INSIDE CHANGE')
     let id = data.id;
 
     const currentIndex = chatList.findIndex( (d)=> d.id=== id);
 
-    const updateIndex = {...chatList[currentIndex],rating:data.rate, feedback:data.feedback};
+    const updateIndex = {...chatList[currentIndex],rating:data.rate, feedback:data.feedback, time:formatedTime};
 
     const newIndex = [...chatList.slice(0,currentIndex), updateIndex, ...chatList.slice(currentIndex+1)];
 
