@@ -41,8 +41,21 @@
    padding: 0px;
 }
 
+.response{
+    display: flex;
+    /* visibility: hidden; */
+    /* border: 1px solid red; */
+    min-width: 50%;
+    min-height: 1rem;
+}
 
-.thumbUp, .thumbDown{
+.response:hover{
+    cursor: pointer;
+    /* visibility:inherit; */
+}
+
+
+/* .thumbUp, .thumbDown{
     display: none !important;
 }
 
@@ -53,4 +66,4 @@
 
 .thumbDown:hover{
     display: inline-block !important;
-}
+} */

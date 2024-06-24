@@ -17,6 +17,9 @@ const Landing = () => {
 
 
   const [isHistoryActive, setIsHistoryActive] = useState(false);
+
+  const [isReview, setReview] = useState([]);
+
   const handleInputText = (e) => {
 
     setInputText(e.target.value);
@@ -26,10 +29,17 @@ const Landing = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(sampleData);
-    const ans = sampleData.find((q) => { return q['question']?.toLocaleUpperCase() === inputText.toLocaleUpperCase() });
+    let ans ='';
+    const result = sampleData.find((q) => { return q['question']?.toLocaleUpperCase() === inputText.toLocaleUpperCase() });
+    if(result){
+      ans = result.response;
+    }
+    else{
+      ans = null
+    }
     // console.log(ans['response']);
     setDisp(true);
-    setChatList([...chatList, { id: ++nextId, name: inputText, ans: ans?.response }])
+    setChatList([...chatList, { id: ++nextId, name: inputText, ans: ans?ans:'Sorry, no response found' }])
     setInputText('');
     setIsHistoryActive(false);
   }
@@ -52,8 +62,6 @@ const Landing = () => {
     
   }
 
-
-
   const handlePast = () => {
     setIsHistoryActive(true);
     setDisp(false);
@@ -63,6 +71,19 @@ const Landing = () => {
   const handleNewChat = () => {
     setChatList([]);
     setIsHistoryActive(false);
+  }
+
+  const handleChange = (data) => {
+    let newList = [...chatList];
+    console.log('INSIDE CHANGE')
+    let id = data.id;
+    chatList.map((val)=>{
+      console.log(val.id, id)
+      if(val.id== id){
+        console.log('INISDE update')
+        setChatList([...chatList, { id: id, name: val.name, ans:val.ans, rating:data.rate, feedback:data.feedback }])
+      }});
+
   }
 
   return (
@@ -82,7 +103,7 @@ const Landing = () => {
         </div>
         <div>
           {disp &&
-            <Chat question={chatList} />}
+            <Chat question={chatList} handleChange={handleChange}/>}
           {isHistoryActive && (
             <Chat question={chatHistory} from='History' />)}
         </div>
